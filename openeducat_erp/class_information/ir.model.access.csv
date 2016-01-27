@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+class_information_user,Class Information User,model_class_information,base.group_user,1,0,0,0
+class_fee_user,Class Fee User,model_class_fee,base.group_user,1,0,0,0
+class_level_user,Class Level User,model_class_level,base.group_user,1,0,0,0
+class_information_admin,Class Information Admin,model_class_information,base.group_user,1,1,1,1
+class_fee_admin,Class Fee Amin,model_class_fee,base.group_user,1,1,1,1
+class_level_admin,Class Level Admin,model_class_level,base.group_user,1,1,1,1

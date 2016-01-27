@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_op_attendance_register_tree" model="ir.ui.view">
+			<field name="name">op.attendance.register.tree</field>
+			<field name="model">op.attendance.register</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="Attendance Register">
+                                <field name="student_id" />
+                                <field name="name"  />
+                                <field name="class_room" />
+                                <field name="number_of_student" />
+                                <field name="course_id" />
+                                <field name="teacher_id" />
+                                <field name="status" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_op_attendance_register_form" model="ir.ui.view">
+			<field name="name">op.attendance.register.form</field>
+			<field name="model">op.attendance.register</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="Attendance Register" version="7.0">
+				   <header>
+				    <group>
+                       <!-- <span groups="base.group_user">
+                            <field name="state" widget="statusbar" statusbar_visible="d,s,r" />
+                            
+                            <button name="act_submit" states="d" type="object"
+                                string="Submit Attedance" icon="gtk-go-forward" />
+                                
+                            <button name="act_accept" states="s" type="object"
+                                string="Attedance Accepted" icon="gtk-go-forward"
+                                groups="openeducat_erp.group_op_faculty"  />
+                          
+                            <button name="act_reject" states="r" type="object"
+                                string="Attedance Rejected" icon="gtk-go-forward"
+                             groups="openeducat_erp.group_op_faculty"/>
+
+                        </span>
+                        --></group>
+                     </header>
+					<sheet>
+						<separator colspan="4" string="Attendance Register" />
+						<div>
+							<group col="4" colspan="4">
+						        <field name="course_id" />
+								<field name="student_id" domain="[('course_id','=',course_id)]"/>
+								<field name="name"  />
+								<field name="class_room" />
+								<field name="number_of_student" />
+								<field name="teacher_id" />
+								<field name="status"  string="Status"/>
+								</group>
+							<field name="comment" />
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_op_attendance_register_search" model="ir.ui.view">
+			<field name="name">op.attendance.register.search</field>
+			<field name="model">op.attendance.register</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<search string="Attendance Register">
+					<field name="name" />
+					<field name="student_id" />
+				    <field name="course_id" />
+					<field name="standard_id" />
+					<newline />
+					<group expand="0" string="Group By...">
+						<filter string="Name" domain="[]" context="{'group_by':'name'}" />
+						<filter string="Course" domain="[]" context="{'group_by':'course_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="act_open_op_attendance_register_view">
+			<field name="name">Attendance Register</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">op.attendance.register</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_op_attendance_register_search" />
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_attendance_register_view_form">
+			<field name="act_window_id" ref="act_open_op_attendance_register_view" />
+			<field name="sequence" eval="20" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_op_attendance_register_form" />
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_attendance_register_view_tree">
+			<field name="act_window_id" ref="act_open_op_attendance_register_view" />
+			<field name="sequence" eval="10" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_op_attendance_register_tree" />
+		</record>
+	</data>
+</openerp>

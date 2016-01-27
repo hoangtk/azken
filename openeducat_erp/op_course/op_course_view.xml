@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_op_course_tree" model="ir.ui.view">
+			<field name="name">op.course.tree</field>
+			<field name="model">op.course</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="Course">
+                            <field name="course_uniq_id" />
+                            <field name="name" />
+                            <field name="class_room" string="Class Room"/>
+                            <field name="standard_id" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="availability" />
+                            <field name="teacher_id" />
+                            <field name="school_level" />
+                            <field name="price" />
+                             <field name="quota" />
+                             <field name="duration" />
+				</tree>
+			</field>
+		</record>
+		<record id="view_op_course_form" model="ir.ui.view">
+			<field name="name">op.course.form</field>
+			<field name="model">op.course</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="Course" version="7.0">
+				     <header>
+                      <group>
+                        <span groups="base.group_user">
+                            <field name="state" widget="statusbar" statusbar_visible="d,s" />
+                              <button name="act_publish"  type="object"
+                                string="Publish Course" icon="gtk-go-forward" groups="openeducat_erp.group_op_faculty,openeducat_erp.group_op_back_office_admin,openeducat_erp.group_op_back_office"  />
+                              
+                              <button name="act_edit"  type="object"
+                                string="Edit" icon="gtk-go-forward" groups="openeducat_erp.group_op_faculty,openeducat_erp.group_op_back_office_admin,openeducat_erp.group_op_back_office"  />
+                         </span>
+                        </group>
+                    </header>
+					<sheet>
+						<separator colspan="4" string="Course Detail" />
+						<group col="4">
+						    <field name="course_uniq_id" />
+						    <field name="name" attrs="{'readonly': [('state', '=', 's')]}"/>
+							<field name="class_room" string="Class Room" attrs="{'readonly': [('state', '=', 's')]}" />
+							<field name="standard_id" attrs="{'readonly': [('state', '=', 's')]}"/>
+							<field name="start_date" attrs="{'readonly': [('state', '=', 's')]}"/>
+							<field name="end_date" attrs="{'readonly': [('state', '=', 's')]}"/>
+						    <field name="availability" attrs="{'readonly': [('state', '=', 's')]}" />
+							<field name="teacher_id" attrs="{'readonly': [('state', '=', 's')]}"/>
+							<field name="school_level" attrs="{'readonly': [('state', '=', 's')]}"/>
+							<field name="price" attrs="{'readonly': [('state', '=', 's')]}"/>
+							 <field name="quota" attrs="{'readonly': [('state', '=', 's')]}"/>
+							 <field name="duration" attrs="{'readonly': [('state', '=', 's')]}"/>
+							  <field name="code" invisible="1"/>
+							  <field name="admin_created" invisible="1" readonly="0"/>
+							    <field name="invoice_exists" invisible="1" readonly="0"/>
+ 							<!--<field name="section" />
+							<field name="evaluation_type" />
+						--></group>
+						      <notebook colspan="4">
+								 <page string="Reservation List">
+		                                <field name="course_register_ids" colspan="4" nolabel="1">
+		                                    <tree string="Reservation List">
+		                                        <field name="student_id" />
+					                            <field name="course_id" />
+					                              <field name="state" />
+		                                    </tree>
+		                                </field>
+		                            </page>
+		                       </notebook>
+						     <group>
+						            <field name="discription" />
+						     </group>
+						
+						<!--
+						<group colspan="4">
+							<field name="payment_term" />
+						</group>
+						<group string="Subjects">
+							<field name="subject_ids" nolabel="1"/>
+						</group>
+					--></sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_op_course_search" model="ir.ui.view">
+			<field name="name">op.course.search</field>
+			<field name="model">op.course</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<search string="Course">
+					<field name="name" />
+				    <field name="course_uniq_id" />
+<!-- 					<field name="section" /> -->
+					<field name="evaluation_type" />
+					<newline />
+					<group expand="0" string="Group By...">
+						<filter string="Evaluation Type" domain="[]"
+							context="{'group_by':'evaluation_type'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="act_open_op_course_view">
+			<field name="name">Course</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">op.course</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_op_course_search" />
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_course_view_form">
+			<field name="act_window_id" ref="act_open_op_course_view" />
+			<field name="sequence" eval="20" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_op_course_form" />
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_course_view_tree">
+			<field name="act_window_id" ref="act_open_op_course_view" />
+			<field name="sequence" eval="10" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_op_course_tree" />
+		</record>
+		
+		
+		<record id="sequence_type_uniqe_id_course" model="ir.sequence.type">
+            <field name="name">sequence patient</field>
+            <field name="code">op.course</field>
+        </record>
+        
+        <record id="sequence_uniqe_id_course" model="ir.sequence">
+            <field name="name">sequence course</field>
+            <field name="code">op.course</field>
+            <field name="prefix">C</field>
+            <field name="padding">3</field>
+        </record>
+	</data>
+</openerp>

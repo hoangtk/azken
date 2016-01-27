@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_op_announcement_tree" model="ir.ui.view">
+            <field name="name">op.announcement.tree</field>
+            <field name="model">op.announcement</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Announcement">
+                                <field name="announcement_id" />
+                            <field name="title" />
+                            <field name="message" />
+                            <field name="post_to" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_op_announcement_form" model="ir.ui.view">
+            <field name="name">op.announcement.form</field>
+            <field name="model">op.announcement</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Batch" version="7.0">
+                    <sheet>
+                        <separator colspan="4" string="Batch Details" />
+                        <group colspan="4">
+                            <field name="announcement_id" />
+                            <field name="title" />
+                            <field name="message" />
+                            <field name="post_to" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_op_announcement_search" model="ir.ui.view">
+            <field name="name">op.announcement.search</field>
+            <field name="model">op.announcement</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <search string="Announcement">
+                                <field name="announcement_id" />
+                            <field name="title" />
+                            <field name="message" />
+                            <field name="post_to" />
+                    <newline />
+                    <group expand="0" string="Group By...">
+                        <filter string="Annoucement ID" domain="[]"
+                            context="{'group_by':'announcement_id'}" />
+                        <filter string="Title" domain="[]" context="{'group_by':'title'}" />
+                       
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_open_op_announcement_view">
+            <field name="name">Announcement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.announcement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_op_announcement_search" />
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_op_announcement_view_form">
+            <field name="act_window_id" ref="act_open_op_announcement_view" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_announcement_form" />
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_op_announcement_view_tree">
+            <field name="act_window_id" ref="act_open_op_announcement_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_op_announcement_tree" />
+        </record>
+        
+        <record id="sequence_type_uniqe_id_annoucement" model="ir.sequence.type">
+            <field name="name">sequence annoucement</field>
+            <field name="code">op.announcement</field>
+        </record>
+        
+        <record id="sequence_uniqe_id_annoucement" model="ir.sequence">
+            <field name="name">sequence annoucement</field>
+            <field name="code">op.announcement</field>
+            <field name="prefix">ANC</field>
+            <field name="padding">3</field>
+        </record>
+    </data>
+</openerp>

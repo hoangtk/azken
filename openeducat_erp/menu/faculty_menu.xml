@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+	<data>
+		<menuitem id="menu_op_faculty_root" name="Teacher"
+			action="act_open_op_faculty_view" web_icon="images/openeducat.png"
+			web_icon_hover="images/openeducat-hover.png" sequence="10"
+			groups="group_op_faculty,group_op_back_office_admin,group_op_back_office" />
+
+        <!--+++ HoangTK - 01/22/2016 : Modify Menu -->
+        <record model="ir.ui.view" id="board_teacher_view">
+                <field name="name">My Dashboard</field>
+                <field name="model">board.board</field>
+                <field name="arch" type="xml">
+                    <form string="My Dashboard">
+                        <board style="2-1">
+                            <column>
+                            </column>
+                        </board>
+                    </form>
+                </field>
+            </record>       
+        <record model="ir.actions.act_window" id="open_board_teacher_action">
+            <field name="name">My Dashboard</field>
+            <field name="res_model">board.board</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_teacher_view"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+        <menuitem id="menu_op_school_root_teacher" name="Teacher" 
+                    parent="menu_op_faculty_root"
+                    sequence="0"/>
+        <menuitem id="menu_op_school_root_teacher_dashboard" name="Dashboard" 
+                   parent="menu_op_school_root_teacher" action="open_board_teacher_action" 
+                   sequence="0"/>
+        <menuitem id="menu_op_school_root_teacher_teachers" name="Profiles" 
+            parent="menu_op_school_root_teacher"
+            sequence="1" action="act_open_op_faculty_view"
+            groups="group_op_faculty" />   
+        <menuitem id="menu_op_school_root_teacher_students" name="Student Lists" 
+            parent="menu_op_school_root_teacher"
+            sequence="2" action="act_open_op_student_view"
+            groups="group_op_parent" />
+        <menuitem id="menu_op_school_root_teacher_class_information" name="Class Information" 
+            parent="menu_op_school_root_teacher"
+            sequence="3" action="class_information_action"
+            groups="group_op_faculty" />            
+        <menuitem id="menu_op_school_root_teacher_attendance" name="Attendance"
+            parent="menu_op_school_root_teacher" 
+            sequence="4" action="act_open_op_attendance_register_view"
+            groups="group_op_faculty" />      
+        <menuitem id="menu_op_school_root_teacher_reservation" name="Reservation List"
+            parent="menu_op_school_root_teacher"
+            sequence="5" action="act_open_op_course_view" 
+            groups="group_op_faculty" /> 
+        <menuitem id="menu_op_school_root_teacher_room" name="Room Resource"
+            parent="menu_op_school_root_teacher"
+            sequence="6" action="act_open_op_hostel_room_view" 
+            groups="group_op_faculty" /> 
+        <menuitem id="menu_op_school_root_teacher_annoucement" name="Annoucement"
+            parent="menu_op_school_root_teacher"
+            sequence="7" action="act_open_op_announcement_view" 
+            groups="group_op_faculty" />  
+        <!--... HoangTK - 01/22/2016 : Modify Menu -->
+		<menuitem id="menu_op_faculty_main_faculty" name="Faculties"
+			parent="menu_op_faculty_root" sequence="20"
+			groups="group_op_faculty,group_op_back_office_admin,group_op_back_office" />
+
+		<menuitem id="menu_op_faculty_sub_faculty" name="Faculties"
+			parent="menu_op_faculty_main_faculty" sequence="40"
+			action="act_open_op_faculty_view" />
+			
+        <menuitem id="menu_op_parent_sub_faculty" name="Parents"
+            parent="menu_op_faculty_main_faculty" sequence="60"
+            action="act_op_parent_action_form" />
+            
+        <menuitem id="menu_op_course_list_faculty" name="Courses List"
+            parent="menu_op_faculty_main_faculty" sequence="20"
+            action="act_open_op_course_view"  />    
+            
+		<menuitem id="menu_op_student_sub_faculty" name="Students"
+			parent="menu_op_faculty_main_faculty" sequence="60"
+			action="act_open_op_student_view" />
+			
+	  <menuitem id="menu_op_announcement_faculty" name="Announcement"
+            parent="menu_op_faculty_main_faculty" sequence="50"
+            action="act_open_op_announcement_view"  /><!--  
+            
+		<menuitem id="menu_op_course_register_sub_faculty" name="Reservation List"
+            parent="menu_op_faculty_main_faculty" sequence="70"
+            action="act_open_course_register_view" />
+
+		--><menuitem id="menu_op_assignment_faculty" name="Assignment"
+			parent="menu_op_faculty_main_faculty" sequence="80"
+			action="act_open_op_assignment_view" />
+
+		<menuitem id="menu_dashboard_faculty" name="Dashboard"
+			parent="menu_op_faculty_root" sequence="100" />
+
+		<menuitem id="menu_op_dashboard_faculty" name="Faculty Dashboard"
+			parent="menu_dashboard_faculty" sequence="120" action="open_board_faculty" />
+
+		<menuitem id="menu_op_attendance_register_sub_faculty" name="Attendance Registers"
+			parent="menu_op_faculty_main_faculty" sequence="140"
+			action="act_open_op_attendance_register_view" />
+
+		<menuitem id="menu_op_attendance_sheet_sub_faculty" name="Attendance Sheets"
+			parent="menu_op_faculty_main_faculty" sequence="160"
+			action="act_open_op_attendance_sheet_view" />
+
+		<menuitem id="menu_op_exam_main_faculty" name="Exams"
+			parent="menu_op_faculty_main_faculty" sequence="180"
+			action="act_open_op_exam_view" />
+
+		<menuitem id="menu_op_exam_attendees_sub_faculty" name="Exam Attendees"
+			parent="menu_op_faculty_main_faculty" sequence="200"
+			action="act_open_op_exam_attendees_view" />
+
+		<menuitem id="menu_op_marksheet_line_sub_faculty" name="Marksheet Lines"
+			parent="menu_op_faculty_main_faculty" sequence="220"
+			action="act_open_op_marksheet_line_view" />
+
+		<menuitem id="menu_op_result_line_sub_faculty" name="Result Lines"
+			parent="menu_op_faculty_main_faculty" sequence="240"
+			action="act_open_op_result_line_view" />
+
+		<menuitem id="menu_op_book_request_faculty" name="Request A Book(s)"
+			parent="menu_op_faculty_root" sequence="260"
+			groups="group_op_faculty,group_op_back_office_admin,group_op_back_office" />
+
+		<menuitem id="menu_op_book_request_main_faculty" name="Book Request"
+			parent="menu_op_book_request_faculty" sequence="280"
+			action="act_open_op_purchase_view" />
+		
+		<menuitem id="menu_op_book_queue_faculty_main" name="Book Queue Request"
+			parent="menu_op_faculty_root" sequence="45"
+			groups="group_op_back_office,group_op_back_office_admin,group_op_faculty" />
+		
+		<menuitem id="menu_op_book_queue_faculty" name="Book Queue Request"
+			parent="menu_op_book_queue_faculty_main" sequence="45"
+			action="act_open_op_book_queue_view" />
+	</data>
+</openerp>
+	

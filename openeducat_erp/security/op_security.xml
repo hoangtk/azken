@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="group_op_student" model="res.groups">
+			<field name="name">Student</field>
+		</record>
+		<record id="group_op_faculty" model="res.groups">
+			<field name="name">Tutor</field>
+		</record>
+		<record id="group_op_back_office" model="res.groups">
+			<field name="name">Staff</field>
+		</record>
+		<record id="group_op_back_office_admin" model="res.groups">
+			<field name="name">Administrator</field>
+		</record>
+		<record id="group_op_library" model="res.groups">
+			<field name="name">Library</field>
+		</record>
+		<record id="group_op_parent" model="res.groups">
+			<field name="name">Parent</field>
+		</record>
+
+		<record model="ir.rule" id="student_login_rule">
+			<field name="name">Student Login rule</field>
+			<field name="model_id" ref="model_op_student" />
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]" />
+			<field name="domain_force"> [('user_id','=',user.id)]</field>
+		</record>
+        <record model="ir.rule" id="student_admin_login_rule">
+            <field name="name">Student Admin Login rule</field>
+            <field name="model_id" ref="model_op_student" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office_admin'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>
+        <record model="ir.rule" id="student_tutor_login_rule">
+            <field name="name">Student Tutor Login rule</field>
+            <field name="model_id" ref="model_op_student" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_faculty'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>        
+        <record model="ir.rule" id="student_staff_login_rule">
+            <field name="name">Student Staff Login rule</field>
+            <field name="model_id" ref="model_op_student" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>        
+		<record model="ir.rule" id="parent_login_rule">
+			<field name="name">Parent Login rule</field>
+			<field name="model_id" ref="model_op_parent" />
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_parent'))]" />
+			<field name="domain_force"> [('user_id','=',user.id)]</field>
+		</record>
+		<record model="ir.rule" id="student_parent_login_rule">
+			<field name="name">Student Parent Login rule</field>
+			<field name="model_id" ref="model_op_student" />
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_parent'))]" />
+			<field name="domain_force"> [('parent_id','in',[x.id for x in
+				user.parent_ids])]</field>
+		</record>
+        <record model="ir.rule" id="parent_admin_login_rule">
+            <field name="name">Parent Admin Login rule</field>
+            <field name="model_id" ref="model_op_parent" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office_admin'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>		
+        
+        <record model="ir.rule" id="staff_login_rule">
+            <field name="name">Staff Login rule</field>
+            <field name="model_id" ref="model_hr_employee" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office'))]" />
+            <field name="domain_force"> [('user_id','=',user.id)]</field>
+        </record>		
+        <record model="ir.rule" id="staff_admin_login_rule">
+            <field name="name">Staff Admin Login rule</field>
+            <field name="model_id" ref="model_hr_employee" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office_admin'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>        
+        <record model="ir.rule" id="tutor_login_rule">
+            <field name="name"> Tutor Login rule</field>
+            <field name="model_id" ref="model_op_faculty" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_faculty'))]" />
+            <field name="domain_force"> [('user_id','=',user.id)]</field>
+        </record>        
+        <record model="ir.rule" id="tutor_admin_login_rule">
+            <field name="name">Tutor Admin Login rule</field>
+            <field name="model_id" ref="model_op_faculty" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_back_office_admin'))]" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+        </record>        
+        
+		<record model="ir.rule" id="student_parent_login_rule_attendance">
+            <field name="name">Student Parent Login rule</field>
+            <field name="model_id" ref="model_op_attendance_register" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_parent'))]" />
+            <field name="domain_force"> [('student_id','in',[x.id for x in
+                user.parent_ids])]</field>
+        </record>
+        
+        <record model="ir.rule" id="student_parent_login_rule_assigement">
+            <field name="name">Student Parent Login rule</field>
+            <field name="model_id" ref="model_op_assignment_sub_line" />
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_parent'))]" />
+            <field name="domain_force"> [('student_id','in',[x.id for x in
+                user.parent_ids])]</field>
+        </record>
+		
+		<!-- Rule for Book Queue Request to see own Record. -->
+		<record model="ir.rule" id="group_student_book_request_rule">
+			<field name="name">See Own Book Queue Request</field>
+			<field name="model_id" ref="model_op_book_queue"/> 
+			<field name="domain_force"> [('user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+		</record>
+		
+		<!-- Rule for Assignment Submission Request to see own Record. -->
+		<record model="ir.rule" id="assignment_and_student_rule_id">
+			<field name="name">See Own Assignment Submission</field>             
+			<field name="model_id" ref="model_op_assignment_sub_line"/>
+			<field name="domain_force">[('student_id.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+		</record>
+		
+		<!-- Rule for Student see own assignment . -->
+		<record model="ir.rule" id="student_self_assignment_rule_id">
+			<field name="name">Student Self Assignment</field>             
+			<field name="model_id" ref="model_op_assignment"/>
+			<field name="domain_force">[('allocation_ids', 'in', user.user_line[0].id)]</field>
+			<!-- <field name="domain_force">[('id','in', [x.id for x in user.user_line[0].allocation_ids])]</field> -->
+			<field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+		</record>
+
+		<!-- Rule for Student see own course register detail . --><!--
+        <record model="ir.rule" id="student_self_course_rule_id">
+            <field name="name">Student Self Course Register</field>             
+            <field name="model_id" ref="model_course_register"/>
+            <field name="domain_force">[('student_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+        </record>
+
+        --><record model="ir.rule" id="student_self_attendance_id">
+            <field name="name">Student Self Course Register</field>             
+            <field name="model_id" ref="model_op_attendance_register"/>
+            <field name="domain_force">[('student_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+        </record><!--
+        
+        
+        <record model="ir.rule" id="student_course_exam_session">
+            <field name="name">Student Course Exam Session</field>             
+            <field name="model_id" ref="model_op_exam"/>
+            <field name="domain_force"> [('session_id.standard_id','=', user.id)
+               )]</field>
+            <field name="groups" eval="[(4, ref('openeducat_erp.group_op_student'))]"/>
+        </record>
+	--></data>
+</openerp>

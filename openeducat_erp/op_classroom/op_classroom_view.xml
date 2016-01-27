@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="view_op_classroom_tree" model="ir.ui.view">
+			<field name="name">op.classroom.tree</field>
+			<field name="model">op.classroom</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree string="Classroom">
+					<field name="name" />
+					<field name="subject"/>
+					<field name="class_type" />
+					<field name="category" />
+					<field name="course_id" />
+				    <field name="capacity" /><!--
+				    <field name="availability" />
+				--></tree>
+			</field>
+		</record>
+		<record id="view_op_classroom_form" model="ir.ui.view">
+			<field name="name">op.classroom.form</field>
+			<field name="model">op.classroom</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="Classroom" version="7.0">
+					<sheet>
+						<separator string="ClassRoom" colspan="4" />
+						<group col="4">
+							<field name="name" />
+							<field name="subject"/>
+							<field name="class_type" />
+							<field name="course_id" />
+							<field name="category" />
+							<field name="faculty_id" />
+				            <field name="capacity" string="Capacity"/>
+				            <field name="availability" />
+                      
+						</group><!--
+						<notebook>	
+							<page string="Availability">
+
+								<group>
+								<field name="list_class_room" />
+								</group>
+							</page>
+						</notebook>
+						
+					--></sheet>
+				</form>
+			</field>
+		</record>
+		<record id="view_op_classroom_search" model="ir.ui.view">
+			<field name="name">op.classroom.search</field>
+			<field name="model">op.classroom</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<search string="Classroom">
+					<field name="name" />
+					<field name="code" />
+					<field name="capacity" />
+					<field name="facility" />
+					<newline />
+					<group expand="0" string="Group By...">
+						<filter string="Name" domain="[]" context="{'group_by':'name'}" />
+						<filter string="Code" domain="[]" context="{'group_by':'code'}" />
+						<filter string="Capacity" domain="[]" context="{'group_by':'capacity'}" />
+						<!-- <filter string="Facilities" domain="[]" context="{'group_by':'Facility'}" 
+							/> -->
+					</group>
+				</search>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="act_open_op_classroom_view">
+			<field name="name">Classroom</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">op.classroom</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_op_classroom_search" />
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_classroom_view_form">
+			<field name="act_window_id" ref="act_open_op_classroom_view" />
+			<field name="sequence" eval="20" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_op_classroom_form" />
+		</record>
+		<record model="ir.actions.act_window.view" id="act_open_op_classroom_view_tree">
+			<field name="act_window_id" ref="act_open_op_classroom_view" />
+			<field name="sequence" eval="10" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_op_classroom_tree" />
+		</record>
+		
+        <record model="ir.actions.act_window" id="act_open_op_classcombine_view">
+            <field name="name">Class Combine</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.classcombine</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+		
+		
+		<record id="view_op_classcombine_tree" model="ir.ui.view">
+            <field name="name">op.classcombine.tree</field>
+            <field name="model">op.classcombine</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Class Combine">
+                    <field name="available_class" />
+                     <field name="available_class_two" />
+                    <field name="available_seat" />
+                     <field name="available_seat_two" />
+                      <field name="total_seat_available" />
+                     <field name="total_seat_available"/>
+                    <field name="faculty_id" />
+                    <field name="classroom_id" />
+                    
+                </tree>
+            </field>
+        </record>
+		
+		  <record id="view_op_classcombine_form" model="ir.ui.view">
+            <field name="name">op.classcombine.form</field>
+            <field name="model">op.classcombine</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Classroom" version="7.0">
+                    <header>
+                        <button name="create_combine_class" class="oe_highlight" type="object" string="Create Combine Class" attrs="{'invisible':[('sync_data','=',True)]}"></button>
+                    </header>
+                    <sheet>
+                       <!--<field name="sync_data" attrs="{'invisible':[('sync_data','=',True)]}" />
+                        --><separator string="Class Combine" colspan="4" />
+                        <group col="4">
+                            <field name="available_class" />
+                            <field name="available_class_two" />
+                            <field name="available_seat" />
+                             <field name="available_seat_two" />
+                             <field name="faculty_id" />
+                             <field name="total_seat_available"/>
+                              <field name="classroom_id"/>
+                             <field name="sync_data" invisible="1" />
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+		
+		
+        <record model="ir.actions.act_window.view" id="act_open_op_classcombine_view_form">
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_classcombine_form" />
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_op_classcombine_view_tree">
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_op_classcombine_tree" />
+        </record>
+	</data>
+</openerp>

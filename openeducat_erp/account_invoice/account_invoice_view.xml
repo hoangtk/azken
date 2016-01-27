@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+<data>
+
+        <record id="veiw_account_invoice_inherited" model="ir.ui.view">
+            <field name="name">account.invoice</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+              <field name="partner_id" position="before">
+                    <field name="course_id"/>
+              </field>
+               <field name="fiscal_position" position="after">
+                    <field name="student_id"/>
+                    <field name="parent_id"/>
+                    <field name="teacher_id"/>
+                    <field name="standard_id"/>
+      
+                 
+              </field>
+                <field name="account_id" position="after">
+                   <field name="class_name"/>
+                     <field name="payment_id"/>
+                    <field name="duration"/>
+                    <field name="school_level"/>
+                     <field name="start_date" />
+                    <field name="end_date" />
+                   
+                 </field><!--
+                 <field name="name" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                  </field>
+                 --><field name="uos_id" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                  </field>
+                  <field name="account_analytic_id" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                  </field><!--
+                   <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line']/tree/field[@name='product_id']" position="replace">
+                            <field name="course_product_id"/>
+                    </xpath>
+                  -->
+
+                  <xpath expr="//field[@name='invoice_line']/tree/field[@name='product_id']" position="replace">
+                   <field name="product_id" invisible='1'/>
+		                     <field name="course_product_id"/>
+                  </xpath>
+         </field>
+        </record>
+   </data>
+  </openerp>  
+               

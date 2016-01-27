@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.menu" id="menu_op_school_root">
+          <field name="name">Administrator</field>
+        </record>
+        <record model="ir.ui.menu" id="menu_op_faculty_root">
+          <field name="name">Teacher</field>
+        </record>        
+    </data>
+</openerp>

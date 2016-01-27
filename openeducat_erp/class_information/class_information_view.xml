@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="class_information_tree_view">
+            <field name="name">class.information.tree</field>
+            <field name="model">class.information</field>
+            <field name="arch" type="xml">
+                <tree string="Class Information">
+                    <field name="name"/>
+                    <field name="level"/>
+                    <field name="class_subject"/>
+                    <field name="tutor"/>
+                    <field name="exam_type"/>
+                    <field name="session"/>
+                    <field name="fee"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="class_information_form_view">
+            <field name="name">class.information.form</field>
+            <field name="model">class.information</field>
+            <field name="arch" type="xml">
+                <form string="Class Information" version="7.0">
+                    <group>
+                        <group>
+                        <field name="name"/>
+                        <field name="level"/>
+                        <field name="class_subject"/>
+                        </group>
+                        <group>
+                        <field name="tutor"/>
+                        <field name="exam_type"/>
+                        <field name="session"/>
+                        <field name="fee"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>  
+        <record id="class_information_filter" model="ir.ui.view">
+            <field name="name">class.information.search</field>
+            <field name="model">class.information</field>
+            <field name="arch" type="xml">
+                <search string="Search Class Information">
+                    <field name="name"/>
+                    <field name="level"/>
+                    <field name="class_subject"/>
+                    <field name="tutor"/>
+                    <field name="exam_type"/>
+                </search>
+            </field>
+        </record>  
+        <record model="ir.actions.act_window" id="class_information_action">
+            <field name="name">Class Information</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">class.information</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="class_information_filter"/>
+        </record>        
+    </data>
+</openerp>

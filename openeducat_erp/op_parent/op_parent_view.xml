@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data><!--
+        <record id="view_op_parent_tree" model="ir.ui.view">
+            <field name="name">op.parent.tree</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Parent">
+                    <field name="name" />
+                    <field name="student_ids" />
+                </tree>
+            </field>
+        </record>
+        <record id="view_op_parent_form" model="ir.ui.view">
+            <field name="name">op.parent.form</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Parent" version="7.0">
+                    <sheet>
+                        <separator colspan="4" string="Parent" />
+                        <field name="name" placeholder="Parent Name" style="width: 30%%" />
+                        <separator colspan="4" string="Select Student" />
+                        <field name="student_ids" >
+                            <tree>
+                                <field name="title" />
+                                <field name="name" />
+                                <field name="middle_name" />
+                                <field name="last_name" />
+                                <field name="roll_number" />
+                                <field name="course_id" />
+                                <field name="standard_id" />
+                                <field name="batch_id" />
+                            </tree>
+                        </field>
+                        <field name="user_id" placeholder="User Id" style="width: 30%%" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+       --><record id="view_op_parent_search" model="ir.ui.view">
+            <field name="name">op.parent.search</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <search string="Parent">
+                    <field name="name" />
+                    <field name="student_ids" />
+                    <newline />
+                    <group expand="0" string="Group By...">
+                        <filter string="Name" domain="[]" context="{'group_by':'name'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_open_op_parent_view">
+            <field name="name">Parent</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.parent</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_op_parent_search" />
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record><!--
+        <record model="ir.actions.act_window.view" id="act_open_op_parent_view_form">
+            <field name="act_window_id" ref="act_open_op_parent_view" />
+            <field name="sequence" eval="20" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_parent_form" />
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_op_parent_view_tree">
+            <field name="act_window_id" ref="act_open_op_parent_view" />
+            <field name="sequence" eval="10" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_op_parent_tree" />
+        </record>
+        
+        
+        
+        
+        
+         --><record id="view_op_parent_tree" model="ir.ui.view">
+            <field name="name">op.parent.tree</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <field name="name" />
+                    <field name="nric" />
+                    <field name="email" />
+                    <field name="gender" />
+                    <field name="birth_date" />
+                    <field name="user_id" placeholder="User Id" style="width: 30%%" />
+                </tree>
+            </field>
+        </record>
+        
+         <record id="view_op_parent_form" model="ir.ui.view">
+            <field name="name">op.parent.form</field>
+            <field name="model">op.parent</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+               <form>
+                <sheet>
+                      
+                      <field name="photo" widget="image" class="oe_left oe_avatar" nolable='1'/>
+                      <h1>
+                       <field name="parents_uniq_id"  readonly='1'/>
+                      </h1>
+                        <group col="4" >
+                            <field name="name" />
+                            <field name="nric" />
+                            <field name="user_id"/>
+                            <field name="is_admin_group" invisible="1"/>
+                            <field name="password" password="True" attrs="{'readonly':[('is_admin_group','=',False)]}"/>
+                        </group>
+                        <group col="4" >
+                            <field name="email" />
+                            <field name="gender" />
+                        </group>
+                        <group col="4" >
+                            <field name="birth_date" />
+                            <field name="relationship_id" />
+                        </group>
+                       
+                        <group col="4" >
+                            <field name="mobile_number" />
+                            <field name="home_number" />
+                        </group>
+                        <group col="4" >
+                            <field name="account_parent_id" />
+                        </group>
+                        <group>
+                                    <label for="street" string="Address" />
+                                    <div name="div_address">
+                                        <field name="street" placeholder="Street..." />
+                                        <field name="street2" placeholder="Street2" />
+                                        <div class="address_format">
+                                            <field name="city" placeholder="City" style="width: 40%%" />
+                                            <!--<field name="state_id" class="oe_no_button"
+                                                placeholder="State" style="width: 37%%" options='{"no_open": True}' />
+                                            --><field name="zip" placeholder="ZIP" style="width: 20%%" />
+                                        </div>
+                                        <field name="country_id" placeholder="Country" class="oe_no_button"
+                                            options='{"no_open": True}' />
+                                    </div>
+                                    
+                         </group>
+                         
+                        <group col="4" string='Student'>
+                        <field name="student_ids" nolabel='1'>
+                            <tree string='Students'>
+                                <field name="roll_number"/>
+                                <field name="title"/>
+                                <field name="name"/>
+                                <field name="gender"/>
+                                <field name="birth_date"/>
+                                <field name="email"/>
+                            </tree>
+                        </field>
+                       </group>
+                        
+                </sheet>
+               </form>
+            </field>
+        </record>
+         <record id="act_op_parent_action_tree" model="ir.actions.act_window">
+            <field name="name">op.student.parent</field>
+            <field name="res_model">op.parent</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_op_parent_tree"/>
+            <field name="view_model">tree,form</field>
+        </record>
+        
+         <record id="act_op_parent_action_form" model="ir.actions.act_window">
+            <field name="name">op.student.parent</field>
+            <field name="res_model">op.parent</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_op_parent_form"/>
+            <field name="view_model">tree,form</field>
+        </record>      
+        <record id="sequence_type_parents_uniq_id" model="ir.sequence.type">
+            <field name="name">sequence student id</field>
+            <field name="code">op.parent</field>
+        </record>
+         <record id="sequence_parents_uniq_id" model="ir.sequence">
+            <field name="name">sequence parent id</field>
+            <field name="code">op.parent</field>
+            <field name="prefix">PRT</field>
+            <field name="padding">3</field>
+        </record>
+
+        
+    </data>
+</openerp>
